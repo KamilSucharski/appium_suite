@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>Test Results date_placeholder</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: monospace;
+            width: 720px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+	        text-align: center;
+	        font-size: 40px;
+        }
+
+        #summary {
+            display: flex;
+	        justify-content: space-between;
+	        text-align: center;
+	        font-size: 20px;
+        }
+
+        .summary_item {
+            width: 185px;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .success {
+            border: 5px #75a478 solid;
+            background: #a5d6a7;
+        }
+
+        .ignored {
+            border: 5px #c9bc1f solid;
+            background: #ffee58;
+        }
+
+        .failure {
+            border: 5px #ba000d solid;
+            background: #f44336;
+        }
+
+        .test_set {
+            margin-top: 40px;
+            padding: 10px;
+	        font-size: 20px;
+            border-radius: 10px;
+            border: 5px #82b3c9 solid;
+            background: #b3e5fc;
+        }
+
+        .test {
+            display: flex;
+	        justify-content: space-between;
+            margin-left: 10%;
+            margin-top: 10px;
+            padding: 10px;
+	        font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .test_description {
+            flex-grow: 1;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .test_icon {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .test_icons {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+    <script>
+        function openWindow(content) {
+            var win = window.open("", "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=960,height=960");
+            win.document.body.innerHTML = content;
+        }
+    </script>
+</head>
+<body>
+<h1>Test Results date_placeholder</h1>
+<div id="summary">
+    <span class="summary_item success">Success: success_count_placeholder/total_count_placeholder<br/>(success_percent_placeholder%)</span>
+    <span class="summary_item ignored">Ignored: ignored_count_placeholder/total_count_placeholder<br/>(ignored_percent_placeholder%)</span>
+    <span class="summary_item failure">Failure: failure_count_placeholder/total_count_placeholder<br/>(failure_percent_placeholder%)</span>
+</div>
+
+<h1>Details</h1>
+details_placeholder
+</body>
+</html>

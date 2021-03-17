@@ -1,0 +1,1 @@
+For installation and usage instructions visit the [wiki]

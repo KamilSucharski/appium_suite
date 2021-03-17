@@ -1,0 +1,59 @@
+import javax.swing.*
+
+plugins {
+    id 'java'
+}
+
+dependencies {
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+}
+
+class TestTask extends Test {
+
+    @Option(option = "packageName", description = "Package to run tests in")
+    String packageName
+
+    @Override
+    void executeTests() {
+        include(packageName)
+        super.executeTests()
+    }
+}
+
+task completeRegressionAndroid(type: TestTask) {
+    packageName = "android/test/regression/CompleteRegressionAndroidSuite.class"
+}
+
+task onlySemiAutomatedRegressionAndroid(type: TestTask) {
+    packageName = "android/test/regression/OnlySemiAutomatedRegressionAndroidSuite.class"
+}
+
+task onlyFullyAutomatedRegressionAndroid(type: TestTask) {
+    packageName = "android/test/regression/OnlyFullyAutomatedRegressionAndroidSuite.class"
+}
+
+task completeRegressionIOS(type: TestTask) {
+    packageName = "ios/test/regression/CompleteRegressionIOSSuite.class"
+}
+
+task reportClean {
+    doLast {
+        int dialogResult = JOptionPane.showConfirmDialog (
+            null,
+            "This action will delete both json and html reports.",
+            "Delete reports?",
+            JOptionPane.YES_NO_OPTION
+        )
+
+        if (dialogResult == JOptionPane.YES_OPTION){
+            final File reportOutputDirectory = new File("report")
+            if (reportOutputDirectory.exists()) {
+                reportOutputDirectory.deleteDir()
+            }
+        }
+    }
+}
+
+task reportHTML(type: TestTask) {
+    packageName = "common/report/html/HTMLReportGenerator.class"
+}
