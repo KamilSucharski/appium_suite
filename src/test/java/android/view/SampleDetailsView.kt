@@ -1,10 +1,8 @@
-package android.view;
+package android.view
 
-import org.openqa.selenium.By;
+import android.util.AndroidAppiumConstants
+import org.openqa.selenium.By
 
-import static android.util.AndroidAppiumConstants.ID_PREFIX;
-
-public final class SampleDetailsView {
-
-    public static final By NAME_LABEL = By.id(ID_PREFIX + "sample_name_text_view");
+object SampleDetailsView {
+    val NAME_LABEL: By = By.id(AndroidAppiumConstants.ID_PREFIX + "sample_name_text_view")
 }

@@ -1,58 +1,56 @@
-package android.util;
+package android.util
 
-import common.PlatformSpecificInstructions;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
+import common.PlatformSpecificInstructions
+import io.appium.java_client.MobileElement
+import io.appium.java_client.android.AndroidDriver
 
-public final class AndroidSpecificInstructions extends PlatformSpecificInstructions<AndroidDriver<MobileElement>> {
+class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver<MobileElement>>() {
 
-    @Override
-    public void resetApplication() throws Exception {
-        ADBCommands.resetApplication();
+    @Throws(Exception::class)
+    override fun resetApplication() {
+        ADBCommands.resetApplication()
     }
 
-    @Override
-    public void restartApplication() throws Exception {
-        ADBCommands.restartApplication();
+    @Throws(Exception::class)
+    override fun restartApplication() {
+        ADBCommands.restartApplication()
     }
 
-    @Override
-    public void grantPermissions() throws Exception {
-        ADBCommands.grantPermissions();
+    @Throws(Exception::class)
+    override fun grantPermissions() {
+        ADBCommands.grantPermissions()
     }
 
-    @Override
-    public void revokePermissions() throws Exception {
-        ADBCommands.revokePermissions();
+    @Throws(Exception::class)
+    override fun revokePermissions() {
+        ADBCommands.revokePermissions()
     }
 
-    @Override
-    public void displayMessage(final String message) throws Exception {
-        ADBCommands.displayMessage(message);
+    @Throws(Exception::class)
+    override fun displayMessage(message: String) {
+        ADBCommands.displayMessage(message)
     }
 
-    @Override
-    public void vibrateDevice(final long duration) throws Exception {
-        ADBCommands.vibrateDevice(duration);
+    @Throws(Exception::class)
+    override fun vibrateDevice(duration: Long) {
+        ADBCommands.vibrateDevice(duration)
     }
 
-    @Override
-    public void copyApplicationFile() throws Exception {
+    @Throws(Exception::class)
+    override fun copyApplicationFile() {
         // not needed
     }
 
-    @Override
-    public void removeApplicationFile() throws Exception {
+    @Throws(Exception::class)
+    override fun removeApplicationFile() {
         // not needed
     }
 
-    @Override
-    public String getApplicationName(final AndroidDriver<MobileElement> driver) {
-        return driver.getCurrentPackage();
+    override fun getApplicationName(driver: AndroidDriver<MobileElement>): String {
+        return driver.currentPackage
     }
 
-    @Override
-    public String getScreenName(final AndroidDriver<MobileElement> driver) {
-        return driver.currentActivity();
+    override fun getScreenName(driver: AndroidDriver<MobileElement>): String {
+        return driver.currentActivity()
     }
 }

@@ -1,81 +1,73 @@
-package android.test.sample;
+package android.test.sample
 
-import android.util.AndroidTest;
-import android.view.SampleDetailsView;
-import android.view.SampleListView;
-import common.ListUtils;
-import common.junit.TestDescription;
-import io.appium.java_client.MobileElement;
-import org.junit.Test;
+import android.util.AndroidTest
+import android.view.SampleListView
+import common.ListUtils
+import common.junit.TestDescription
+import io.appium.java_client.MobileElement
+import org.junit.Assert
+import org.junit.Test
+import java.util.*
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Stream;
-
-import static org.junit.Assert.assertEquals;
-
-public final class SampleListAndroidTest extends AndroidTest {
+class SampleListAndroidTest : AndroidTest() {
 
     @Test
     @TestDescription("Test mode is set to true")
-    public void C001() throws Exception {
-        platformSpecificInstructions.restartApplication();
-        assertEquals(
+    @Throws(Exception::class)
+    fun c001() {
+        platformSpecificInstructions.restartApplication()
+        Assert.assertEquals(
             "true",
-            driver.findElement(SampleListView.TEST_MODE_ENABLED_LABEL).getText()
-        );
+            driver.findElement(SampleListView.TEST_MODE_ENABLED_LABEL).text
+        )
     }
 
     @Test
     @TestDescription("Number of app launches is counted correctly")
-    public void C002() throws Exception {
-        platformSpecificInstructions.resetApplication();
-        assertEquals(
+    @Throws(Exception::class)
+    fun c002() {
+        platformSpecificInstructions.resetApplication()
+        Assert.assertEquals(
             "1",
-            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).getText()
-        );
-
-        platformSpecificInstructions.restartApplication();
-        assertEquals(
+            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
+        )
+        platformSpecificInstructions.restartApplication()
+        Assert.assertEquals(
             "2",
-            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).getText()
-        );
-
-        platformSpecificInstructions.restartApplication();
-        assertEquals(
+            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
+        )
+        platformSpecificInstructions.restartApplication()
+        Assert.assertEquals(
             "3",
-            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).getText()
-        );
-
-        platformSpecificInstructions.resetApplication();
-        assertEquals(
+            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
+        )
+        platformSpecificInstructions.resetApplication()
+        Assert.assertEquals(
             "1",
-            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).getText()
-        );
+            driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
+        )
     }
 
     @Test
     @TestDescription("List contains 26 elements")
-    public void C003() throws Exception {
-        platformSpecificInstructions.restartApplication();
-
-        final Set<String> foundItems = new HashSet<>();
+    @Throws(Exception::class)
+    fun c003() {
+        platformSpecificInstructions.restartApplication()
+        val foundItems: MutableSet<String> = HashSet()
         ListUtils.scrollToBottom(
             driver,
-            SampleListView.LIST,
-            () -> {
-                driver
-                    .findElements(SampleListView.LIST_ELEMENT_LABEL)
-                    .stream()
-                    .map(MobileElement::getText)
-                    .forEach(foundItems::add);
-                return false;
-            }
-        );
-
-        assertEquals(
+            SampleListView.LIST
+        ) {
+            driver
+                .findElements(SampleListView.LIST_ELEMENT_LABEL)
+                .stream()
+                .map { obj: MobileElement -> obj.text }
+                .forEach { e: String -> foundItems.add(e) }
+            false
+        }
+        Assert.assertEquals(
             26,
-            foundItems.size()
-        );
+            foundItems.size
+        )
     }
 }
