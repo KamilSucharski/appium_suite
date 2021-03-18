@@ -43,7 +43,7 @@ class HTMLReportGenerator {
     }
 
     private fun fillTemplateSummarySection(template: String, entries: List<ReportEntry>): String {
-        var template = template
+        var filledTemplate = template
         val totalCount = entries.size.toLong()
         val successCount = entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.SUCCESS }.count()
         val successPercent = 100 * successCount / totalCount
@@ -51,14 +51,14 @@ class HTMLReportGenerator {
         val failurePercent = 100 * failureCount / totalCount
         val ignoredCount = entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.IGNORED }.count()
         val ignoredPercent = 100 * ignoredCount / totalCount
-        template = template.replace("total_count_placeholder", totalCount.toString())
-        template = template.replace("success_count_placeholder", successCount.toString())
-        template = template.replace("success_percent_placeholder", successPercent.toString())
-        template = template.replace("failure_count_placeholder", failureCount.toString())
-        template = template.replace("failure_percent_placeholder", failurePercent.toString())
-        template = template.replace("ignored_count_placeholder", ignoredCount.toString())
-        template = template.replace("ignored_percent_placeholder", ignoredPercent.toString())
-        return template
+        filledTemplate = filledTemplate.replace("total_count_placeholder", totalCount.toString())
+        filledTemplate = filledTemplate.replace("success_count_placeholder", successCount.toString())
+        filledTemplate = filledTemplate.replace("success_percent_placeholder", successPercent.toString())
+        filledTemplate = filledTemplate.replace("failure_count_placeholder", failureCount.toString())
+        filledTemplate = filledTemplate.replace("failure_percent_placeholder", failurePercent.toString())
+        filledTemplate = filledTemplate.replace("ignored_count_placeholder", ignoredCount.toString())
+        filledTemplate = filledTemplate.replace("ignored_percent_placeholder", ignoredPercent.toString())
+        return filledTemplate
     }
 
     @Throws(Exception::class)
@@ -91,6 +91,7 @@ class HTMLReportGenerator {
                     TestCategory.HELPER -> {
                         testIconBuilder.append(helperIconTemplate)
                     }
+                    else -> {}
                 }
                 detailsBuilder.append(testTemplate
                     .replace("color_class_placeholder", entry.testResult.toString().toLowerCase())

@@ -15,10 +15,10 @@ object ManualAction {
      */
     @Throws(Exception::class)
     fun perform(
-        driver: AppiumDriver<MobileElement?>,
+        driver: AppiumDriver<MobileElement>,
         platformSpecificInstructions: PlatformSpecificInstructions<*>,
-        triggerBy: By?,
-        message: String?
+        triggerBy: By,
+        message: String
     ) {
         driver
             .manage()

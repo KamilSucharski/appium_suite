@@ -14,8 +14,10 @@ abstract class AppiumTest<T : MobileDriver<MobileElement>> {
     protected val platformSpecificInstructions by lazy { createPlatformSpecificInstructions() }
     protected lateinit var driver: T
 
+    @JvmField
     @Rule
     val toastTestWatcher: TestRule = ToastTestWatcher(platformSpecificInstructions)
+    @JvmField
     @Rule
     val reportTestWatcher: TestRule = ReportTestWatcher()
 
