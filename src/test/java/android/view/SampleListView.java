@@ -10,4 +10,5 @@ public final class SampleListView {
 
     public static final By TEST_MODE_ENABLED_LABEL = By.id(ID_PREFIX + "test_mode_enabled_text_view");
     public static final By APP_LAUNCHES_LABEL = By.id(ID_PREFIX + "app_launches_text_view");
+    public static final By LIST_ELEMENT_LABEL = By.id("android:id/text1");
 }

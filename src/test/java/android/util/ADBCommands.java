@@ -90,7 +90,7 @@ public final class ADBCommands {
     }
 
     public static void displayMessage(final String message) throws Exception {
-        final String encodedMessage = message.replaceAll(" ", "_");
+        final String encodedMessage = message.replaceAll(" ", "\\\\ ");
         final String command = String.format(DISPLAY_MESSAGE_COMMAND, encodedMessage);
         executeCommand(command);
     }
