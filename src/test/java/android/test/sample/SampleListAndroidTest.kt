@@ -7,7 +7,6 @@ import common.junit.TestDescription
 import io.appium.java_client.MobileElement
 import org.junit.Assert
 import org.junit.Test
-import java.util.*
 
 class SampleListAndroidTest : AndroidTest() {
 
@@ -31,16 +30,19 @@ class SampleListAndroidTest : AndroidTest() {
             "1",
             driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
         )
+
         platformSpecificInstructions.restartApplication()
         Assert.assertEquals(
             "2",
             driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
         )
+
         platformSpecificInstructions.restartApplication()
         Assert.assertEquals(
             "3",
             driver.findElement(SampleListView.APP_LAUNCHES_LABEL).text
         )
+
         platformSpecificInstructions.resetApplication()
         Assert.assertEquals(
             "1",
@@ -53,7 +55,8 @@ class SampleListAndroidTest : AndroidTest() {
     @Throws(Exception::class)
     fun c003() {
         platformSpecificInstructions.restartApplication()
-        val foundItems: MutableSet<String> = HashSet()
+
+        val foundItems = mutableSetOf<String>()
         ListUtils.scrollToBottom(
             driver,
             SampleListView.LIST
@@ -61,8 +64,8 @@ class SampleListAndroidTest : AndroidTest() {
             driver
                 .findElements(SampleListView.LIST_ELEMENT_LABEL)
                 .stream()
-                .map { obj: MobileElement -> obj.text }
-                .forEach { e: String -> foundItems.add(e) }
+                .map(MobileElement::getText)
+                .forEach(foundItems::add)
             false
         }
         Assert.assertEquals(

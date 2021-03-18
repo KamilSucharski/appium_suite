@@ -5,7 +5,6 @@ import common.ImageUtils.imagesAreEqual
 import common.SharedConstants.TIMEOUT_MILLISECONDS
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.MobileElement
-import io.appium.java_client.TouchAction
 import io.appium.java_client.touch.offset.PointOption
 import org.openqa.selenium.By
 import org.openqa.selenium.NoSuchElementException
@@ -96,13 +95,5 @@ object ListUtils {
         }
         driver.manage().timeouts().implicitlyWait(TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
         return elementArray[0] ?: throw NoSuchElementException("Element not found on list")
-    }
-
-    fun interface ListScrollCallback {
-        /**
-         * If this returns true, it cancels further scrolling
-         */
-        @Throws(Exception::class)
-        fun doBeforeEachScroll(): Boolean
     }
 }

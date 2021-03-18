@@ -17,7 +17,7 @@ object DriverUtils {
      * This will continue when element is not displayed.
      */
     @Throws(ElementDidNotDisappearException::class)
-    fun continueWhenElementIsNotDisplayed(driver: AppiumDriver<MobileElement>, locator: By?) {
+    fun continueWhenElementIsNotDisplayed(driver: AppiumDriver<MobileElement>, locator: By) {
         driver
             .manage()
             .timeouts()
@@ -44,13 +44,13 @@ object DriverUtils {
         throw ElementDidNotDisappearException()
     }
 
-    fun continueWhenElementIsEnabled(driver: AppiumDriver<MobileElement?>, locator: By?) {
+    fun continueWhenElementIsEnabled(driver: AppiumDriver<MobileElement>, locator: By) {
         val wait = create(driver)
         val nextButton = driver.findElement(locator)
         wait.until(ExpectedConditions.attributeToBe(nextButton, "enabled", "true"))
     }
 
-    fun isElementDisplayed(driver: AppiumDriver<MobileElement>, locator: By?): Boolean {
+    fun isElementDisplayed(driver: AppiumDriver<MobileElement>, locator: By): Boolean {
         return try {
             driver.findElement(locator).isDisplayed
         } catch (e: NoSuchElementException) {

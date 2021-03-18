@@ -71,10 +71,10 @@ class HTMLReportGenerator {
         val helperIconTemplate = getFileContent(ReportConstants.HTML_REPORT_ICON_HELPER_TEMPLATE_FILE_PATH)
         val testSets: List<Map.Entry<String, List<ReportEntry>>> = entries
             .stream()
-            .collect(Collectors.groupingBy { obj: ReportEntry -> obj.className })
+            .collect(Collectors.groupingBy { it.className })
             .entries
             .stream()
-            .sorted { o1: Map.Entry<String, List<ReportEntry?>?>, o2: Map.Entry<String, List<ReportEntry?>?> -> o1.key.compareTo(o2.key) }
+            .sorted { o1: Map.Entry<String, List<ReportEntry>>, o2: Map.Entry<String, List<ReportEntry>> -> o1.key.compareTo(o2.key) }
             .collect(Collectors.toList())
         for ((key, value) in testSets) {
             detailsBuilder.append(testSetTemplate.replace("test_set_name_placeholder", key))

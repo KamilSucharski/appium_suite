@@ -40,7 +40,7 @@ abstract class AndroidTest : AppiumTest<AndroidDriver<MobileElement>>() {
         desiredCapabilities.setCapability(ANDROID_SCREENSHOT_PATH_ATTRIBUTE_KEY, ANDROID_SCREENSHOT_PATH_ATTRIBUTE_VALUE)
         desiredCapabilities.setCapability(PACKAGE_NAME_ATTRIBUTE_KEY, PACKAGE_NAME_ATTRIBUTE_VALUE)
         val driver = AndroidDriver<MobileElement>(URL(DRIVER_URL), desiredCapabilities)
-        driver.manage().timeouts().implicitlyWait(SharedConstants.TIMEOUT_MILLISECONDS.toLong(), TimeUnit.MILLISECONDS)
+        driver.manage().timeouts().implicitlyWait(SharedConstants.TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
         return driver
     }
 

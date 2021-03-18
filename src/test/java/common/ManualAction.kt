@@ -2,6 +2,7 @@ package common
 
 import common.exception.ManualActionRequiredException
 import io.appium.java_client.AppiumDriver
+import io.appium.java_client.MobileDriver
 import io.appium.java_client.MobileElement
 import org.openqa.selenium.By
 import org.openqa.selenium.NoSuchElementException
@@ -16,7 +17,7 @@ object ManualAction {
     @Throws(Exception::class)
     fun perform(
         driver: AppiumDriver<MobileElement>,
-        platformSpecificInstructions: PlatformSpecificInstructions<*>,
+        platformSpecificInstructions: PlatformSpecificInstructions<out MobileDriver<MobileElement>>,
         triggerBy: By,
         message: String
     ) {

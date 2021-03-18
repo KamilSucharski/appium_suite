@@ -4,7 +4,6 @@ import kotlin.Throws
 import java.lang.Exception
 import io.appium.java_client.MobileElement
 import java.awt.image.BufferedImage
-import common.ImageUtils
 import org.openqa.selenium.OutputType
 import javax.imageio.ImageIO
 
@@ -19,7 +18,13 @@ object ImageUtils {
     @JvmStatic
     @Throws(Exception::class)
     fun createScreenshotOfMiddleOfTheElement(element: MobileElement): BufferedImage {
-        return createScreenshotOfTheElement(element, 20, 20, 40, 40)
+        return createScreenshotOfTheElement(
+            element,
+            20,
+            20,
+            40,
+            40
+        )
     }
 
     @Throws(Exception::class)
