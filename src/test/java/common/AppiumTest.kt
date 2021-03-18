@@ -1,34 +1,37 @@
-package common;
+package common
 
-import common.watcher.ReportTestWatcher;
-import common.watcher.ToastTestWatcher;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.rules.TestRule;
+import common.watcher.ReportTestWatcher
+import common.watcher.ToastTestWatcher
+import io.appium.java_client.MobileDriver
+import io.appium.java_client.MobileElement
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.rules.TestRule
 
-public abstract class AppiumTest<T extends MobileDriver<MobileElement>> {
+abstract class AppiumTest<T : MobileDriver<MobileElement>> {
 
-    protected T driver;
-    protected PlatformSpecificInstructions<T> platformSpecificInstructions = createPlatformSpecificInstructions();
+    protected val platformSpecificInstructions by lazy { createPlatformSpecificInstructions() }
+    protected lateinit var driver: T
+
     @Rule
-    public final TestRule toastTestWatcher = new ToastTestWatcher<>(platformSpecificInstructions);
+    val toastTestWatcher: TestRule = ToastTestWatcher(platformSpecificInstructions)
     @Rule
-    public final TestRule reportTestWatcher = new ReportTestWatcher();
+    val reportTestWatcher: TestRule = ReportTestWatcher()
 
-    protected abstract T createDriver() throws Exception;
+    @Throws(Exception::class)
+    protected abstract fun createDriver(): T
 
-    protected abstract PlatformSpecificInstructions<T> createPlatformSpecificInstructions();
+    protected abstract fun createPlatformSpecificInstructions(): PlatformSpecificInstructions<T>
 
     @Before
-    public void before() throws Exception {
-        driver = createDriver();
+    @Throws(Exception::class)
+    fun before() {
+        driver = createDriver()
     }
 
     @After
-    public void after() {
-        driver.quit();
+    fun after() {
+        driver.quit()
     }
 }

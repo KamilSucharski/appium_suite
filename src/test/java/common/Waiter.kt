@@ -1,13 +1,11 @@
-package common;
+package common
 
-import io.appium.java_client.AppiumDriver;
+object Waiter {
 
-public final class Waiter {
-
-    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
-    public static void wait(final AppiumDriver driver, final long milliseconds) throws Exception {
-        synchronized (driver) {
-            driver.wait(milliseconds);
+    @Throws(Exception::class)
+    fun wait(driver: Object, milliseconds: Long) {
+        synchronized(driver) {
+            driver.wait(milliseconds)
         }
     }
 }

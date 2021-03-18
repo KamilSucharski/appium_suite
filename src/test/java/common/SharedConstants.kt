@@ -1,6 +1,7 @@
-package common;
+package common
 
-public final class SharedConstants {
+object SharedConstants {
 
-    public static final int TIMEOUT_MILLISECONDS = 30000;
+    const val TIMEOUT_MILLISECONDS = 30000L
+    const val EMPTY = ""
 }

@@ -1,55 +1,52 @@
-package ios.util;
+package ios.util
 
-import common.PlatformSpecificInstructions;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
+import common.PlatformSpecificInstructions
+import io.appium.java_client.MobileElement
+import io.appium.java_client.ios.IOSDriver
 
-public final class IOSSpecificInstructions extends PlatformSpecificInstructions<IOSDriver<MobileElement>> {
+class IOSSpecificInstructions : PlatformSpecificInstructions<IOSDriver<MobileElement>> {
 
-    @Override
-    public void resetApplication() throws Exception {
-        SIMCTLCommands.resetApplication();
+    @Throws(Exception::class)
+    override fun resetApplication() {
+        SIMCTLCommands.resetApplication()
     }
 
-    @Override
-    public void restartApplication() throws Exception {
-        SIMCTLCommands.restartApplication();
+    @Throws(Exception::class)
+    override fun restartApplication() {
+        SIMCTLCommands.restartApplication()
     }
 
-    @Override
-    public void grantPermissions() throws Exception {
+    @Throws(Exception::class)
+    override fun grantPermissions() {
     }
 
-    @Override
-    public void revokePermissions() throws Exception {
+    @Throws(Exception::class)
+    override fun revokePermissions() {
     }
 
-    @Override
-    public void displayMessage(final String message) throws Exception {
+    @Throws(Exception::class)
+    override fun displayMessage(message: String) {
     }
 
-    @Override
-    public void vibrateDevice(final long duration) throws Exception {
+    @Throws(Exception::class)
+    override fun vibrateDevice(duration: Long) {
     }
 
-    @Override
-    public void copyApplicationFile() throws Exception {
-        SIMCTLCommands.copyApplicationFile();
+    @Throws(Exception::class)
+    override fun copyApplicationFile() {
+        SIMCTLCommands.copyApplicationFile()
     }
 
-    @Override
-    public void removeApplicationFile() throws Exception {
-        SIMCTLCommands.removeApplicationFile();
+    @Throws(Exception::class)
+    override fun removeApplicationFile() {
+        SIMCTLCommands.removeApplicationFile()
     }
 
-    @Override
-    public String getApplicationName(final IOSDriver<MobileElement> driver) {
-        return null;
+    override fun getApplicationName(driver: IOSDriver<MobileElement>): String {
+        return "TODO"
     }
 
-    @Override
-    public String getScreenName(final IOSDriver<MobileElement> driver) {
-        return null;
+    override fun getScreenName(driver: IOSDriver<MobileElement>): String {
+        return "TODO"
     }
-
 }

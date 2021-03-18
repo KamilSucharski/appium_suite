@@ -1,4 +1,3 @@
-package common.junit;
+package common.junit
 
-public interface SemiAutomated {
-}
+interface SemiAutomated

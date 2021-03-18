@@ -1,15 +1,14 @@
-package ios.util;
+package ios.util
 
-public final class IOSAppiumConstants {
-
-    public static final String PLATFORM_NAME_ATTRIBUTE_KEY = "platformName";
-    public static final String PLATFORM_NAME_ATTRIBUTE_VALUE = "iOS";
-    public static final String DEVICE_NAME_ATTRIBUTE_KEY = "deviceName";
-    public static final String DEVICE_NAME_ATTRIBUTE_VALUE = "iPhone 11";
-    public static final String AUTOMATION_NAME_ATTRIBUTE_KEY = "automationName";
-    public static final String AUTOMATION_NAME_ATTRIBUTE_VALUE = "XCUITest";
-    public static final String BUNDLE_ID_ATTRIBUTE_KEY = "bundleId";
-    public static final String BUNDLE_ID_ATTRIBUTE_VALUE = "com.sengami.sample_testable_app_ios";
-    public static final String DRIVER_URL = "http://0.0.0.0:4723/wd/hub";
-    public static final String APP_NAME = "sample.app";
+object IOSAppiumConstants {
+    const val PLATFORM_NAME_ATTRIBUTE_KEY = "platformName"
+    const val PLATFORM_NAME_ATTRIBUTE_VALUE = "iOS"
+    const val DEVICE_NAME_ATTRIBUTE_KEY = "deviceName"
+    const val DEVICE_NAME_ATTRIBUTE_VALUE = "iPhone 11"
+    const val AUTOMATION_NAME_ATTRIBUTE_KEY = "automationName"
+    const val AUTOMATION_NAME_ATTRIBUTE_VALUE = "XCUITest"
+    const val BUNDLE_ID_ATTRIBUTE_KEY = "bundleId"
+    const val BUNDLE_ID_ATTRIBUTE_VALUE = "com.sengami.sample_testable_app_ios"
+    const val DRIVER_URL = "http://0.0.0.0:4723/wd/hub"
+    const val APP_NAME = "sample.app"
 }

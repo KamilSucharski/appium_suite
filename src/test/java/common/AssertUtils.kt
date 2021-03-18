@@ -1,11 +1,10 @@
-package common;
+package common
 
-import static org.junit.Assume.assumeTrue;
+import org.junit.Assume
 
-public final class AssertUtils {
+object AssertUtils {
 
-    @SuppressWarnings("ConstantConditions")
-    public static void ignoreTest(final String reason) {
-        assumeTrue(reason, false);
+    fun ignoreTest(reason: String) {
+        Assume.assumeTrue(reason, false)
     }
 }

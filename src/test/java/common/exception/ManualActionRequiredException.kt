@@ -1,4 +1,3 @@
-package common.exception;
+package common.exception
 
-public class ManualActionRequiredException extends RuntimeException {
-}
+class ManualActionRequiredException : RuntimeException()

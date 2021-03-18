@@ -4,7 +4,7 @@ import common.PlatformSpecificInstructions
 import io.appium.java_client.MobileElement
 import io.appium.java_client.android.AndroidDriver
 
-class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver<MobileElement>>() {
+class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver<MobileElement>> {
 
     @Throws(Exception::class)
     override fun resetApplication() {

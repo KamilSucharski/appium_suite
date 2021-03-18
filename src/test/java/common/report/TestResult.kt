@@ -1,5 +1,5 @@
-package common.report;
+package common.report
 
-public enum TestResult {
+enum class TestResult {
     SUCCESS, IGNORED, FAILURE
 }

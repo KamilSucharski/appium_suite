@@ -1,4 +1,3 @@
-package common.exception;
+package common.exception
 
-public class ElementDidNotDisappearException extends RuntimeException {
-}
+class ElementDidNotDisappearException : RuntimeException()

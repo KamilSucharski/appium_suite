@@ -1,14 +1,14 @@
-package common.factory;
+package common.factory
 
-public final class StringFactory {
+object StringFactory {
 
-    private static final char[] ALLOWED_CHARACTERS = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    private val ALLOWED_CHARACTERS = charArrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
 
-    public static String createString(final int length) {
-        final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            builder.append(ALLOWED_CHARACTERS[i % ALLOWED_CHARACTERS.length]);
+    fun createString(length: Int): String {
+        val builder = StringBuilder()
+        for (i in 0 until length) {
+            builder.append(ALLOWED_CHARACTERS[i % ALLOWED_CHARACTERS.size])
         }
-        return builder.toString();
+        return builder.toString()
     }
 }

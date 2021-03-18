@@ -1,124 +1,108 @@
-package common;
+package common
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import common.ImageUtils.createScreenshotOfMiddleOfTheElement
+import common.ImageUtils.imagesAreEqual
+import common.SharedConstants.TIMEOUT_MILLISECONDS
+import io.appium.java_client.AppiumDriver
+import io.appium.java_client.MobileElement
+import io.appium.java_client.TouchAction
+import io.appium.java_client.touch.offset.PointOption
+import org.openqa.selenium.By
+import org.openqa.selenium.NoSuchElementException
+import java.awt.image.BufferedImage
+import java.util.concurrent.TimeUnit
 
-import java.awt.image.BufferedImage;
-import java.util.concurrent.TimeUnit;
+object ListUtils {
 
-import static common.ImageUtils.createScreenshotOfMiddleOfTheElement;
-import static common.ImageUtils.imagesAreEqual;
-import static common.SharedConstants.TIMEOUT_MILLISECONDS;
-
-public final class ListUtils {
-
-    public synchronized static void scrollToTop(final AppiumDriver<MobileElement> driver,
-                                                final By listBy) throws Exception {
-        scrollToLimit(driver, listBy, true, null);
+    @Synchronized
+    @Throws(Exception::class)
+    fun scrollToTop(driver: AppiumDriver<MobileElement>, listBy: By) {
+        scrollToLimit(driver, listBy, true, null)
     }
 
-    public synchronized static void scrollToTop(final AppiumDriver<MobileElement> driver,
-                                                final By listBy,
-                                                final ListScrollCallback callback) throws Exception {
-        scrollToLimit(driver, listBy, true, callback);
+    @Synchronized
+    @Throws(Exception::class)
+    fun scrollToTop(driver: AppiumDriver<MobileElement>, listBy: By, callback: () -> Boolean) {
+        scrollToLimit(driver, listBy, true, callback)
     }
 
-    public synchronized static void scrollToBottom(final AppiumDriver<MobileElement> driver,
-                                                   final By listBy) throws Exception {
-        scrollToLimit(driver, listBy, false, null);
+    @Synchronized
+    @Throws(Exception::class)
+    fun scrollToBottom(driver: AppiumDriver<MobileElement>, listBy: By) {
+        scrollToLimit(driver, listBy, false, null)
     }
 
-    public synchronized static void scrollToBottom(final AppiumDriver<MobileElement> driver,
-                                                   final By listBy,
-                                                   final ListScrollCallback callback) throws Exception {
-        scrollToLimit(driver, listBy, false, callback);
+    @Synchronized
+    @Throws(Exception::class)
+    fun scrollToBottom(driver: AppiumDriver<MobileElement>, listBy: By, callback: () -> Boolean) {
+        scrollToLimit(driver, listBy, false, callback)
     }
 
-    public synchronized static MobileElement findElementWhileScrollingToTop(final AppiumDriver<MobileElement> driver,
-                                                                            final By listBy,
-                                                                            final By elementBy) throws Exception {
-        return findElementWhileScrollingToLimit(driver, listBy, elementBy, true);
+    @Synchronized
+    @Throws(Exception::class)
+    fun findElementWhileScrollingToTop(driver: AppiumDriver<MobileElement>, listBy: By, elementBy: By): MobileElement {
+        return findElementWhileScrollingToLimit(driver, listBy, elementBy, true)
     }
 
-    public synchronized static MobileElement findElementWhileScrollingToBottom(final AppiumDriver<MobileElement> driver,
-                                                                               final By listBy,
-                                                                               final By elementBy) throws Exception {
-        return findElementWhileScrollingToLimit(driver, listBy, elementBy, false);
+    @Synchronized
+    @Throws(Exception::class)
+    fun findElementWhileScrollingToBottom(driver: AppiumDriver<MobileElement>, listBy: By, elementBy: By): MobileElement {
+        return findElementWhileScrollingToLimit(driver, listBy, elementBy, false)
     }
 
-    private synchronized static void scrollToLimit(final AppiumDriver<MobileElement> driver,
-                                                   final By listBy,
-                                                   final boolean toTop,
-                                                   final ListScrollCallback callback) throws Exception {
-        final MobileElement list = driver.findElement(listBy);
-        final int margin = list.getSize().height / 20;
-        final int topOfTheList = list.getLocation().y + margin;
-        final int bottomOfTheList = list.getLocation().y + list.getSize().height - margin;
-        final int leftOfTheList = list.getLocation().x + 1;
-
-        final PointOption startDragPoint = toTop
-            ? PointOption.point(leftOfTheList, topOfTheList)
-            : PointOption.point(leftOfTheList, bottomOfTheList);
-        final PointOption endDragPoint = toTop
-            ? PointOption.point(leftOfTheList, bottomOfTheList)
-            : PointOption.point(leftOfTheList, topOfTheList);
-
-        BufferedImage previousListScreenshot;
-        BufferedImage nextListScreenshot;
-        boolean screeshotsAreEqual;
-
+    @Synchronized
+    @Throws(Exception::class)
+    private fun scrollToLimit(driver: AppiumDriver<MobileElement>, listBy: By, toTop: Boolean, callback: (() -> Boolean)?) {
+        val list = driver.findElement(listBy)
+        val margin = list.size.height / 20
+        val topOfTheList = list.location.y + margin
+        val bottomOfTheList = list.location.y + list.size.height - margin
+        val leftOfTheList = list.location.x + 1
+        val startDragPoint = if (toTop) PointOption.point(leftOfTheList, topOfTheList) else PointOption.point(leftOfTheList, bottomOfTheList)
+        val endDragPoint = if (toTop) PointOption.point(leftOfTheList, bottomOfTheList) else PointOption.point(leftOfTheList, topOfTheList)
+        var previousListScreenshot: BufferedImage
+        var nextListScreenshot: BufferedImage
+        var screenshotsAreEqual: Boolean
         do {
-            if (callback != null && callback.doBeforeEachScroll()) {
-                return;
+            if (callback != null && callback()) {
+                return
             }
-
-            previousListScreenshot = createScreenshotOfMiddleOfTheElement(list);
-
-            new TouchAction(driver)
+            previousListScreenshot = createScreenshotOfMiddleOfTheElement(list)
+            MobileTouchAction(driver)
                 .longPress(startDragPoint)
                 .moveTo(endDragPoint)
                 .release()
-                .perform();
-
-            nextListScreenshot = createScreenshotOfMiddleOfTheElement(list);
-            screeshotsAreEqual = imagesAreEqual(previousListScreenshot, nextListScreenshot);
-        } while (!screeshotsAreEqual);
+                .perform()
+            nextListScreenshot = createScreenshotOfMiddleOfTheElement(list)
+            screenshotsAreEqual = imagesAreEqual(previousListScreenshot, nextListScreenshot)
+        } while (!screenshotsAreEqual)
     }
 
-    private synchronized static MobileElement findElementWhileScrollingToLimit(final AppiumDriver<MobileElement> driver,
-                                                                               final By listBy,
-                                                                               final By elementBy,
-                                                                               final boolean toTop) throws Exception {
-        final MobileElement[] elementArray = new MobileElement[1];
-
-        ListUtils.scrollToLimit(driver, listBy, toTop, () -> {
-            driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    @Synchronized
+    @Throws(Exception::class)
+    private fun findElementWhileScrollingToLimit(driver: AppiumDriver<MobileElement>,
+                                                 listBy: By,
+                                                 elementBy: By,
+                                                 toTop: Boolean): MobileElement {
+        val elementArray = arrayOfNulls<MobileElement>(1)
+        scrollToLimit(driver, listBy, toTop) {
+            driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS)
             try {
-                elementArray[0] = driver.findElement(elementBy);
-                return true;
-            } catch (final NoSuchElementException ignored) {
+                elementArray[0] = driver.findElement(elementBy)
+                return@scrollToLimit true
+            } catch (ignored: NoSuchElementException) {
             }
-            return false;
-        });
-        driver.manage().timeouts().implicitlyWait(TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS);
-
-        final MobileElement element = elementArray[0];
-        if (element == null) {
-            throw new NoSuchElementException("Element not found on list");
+            false
         }
-
-        return element;
+        driver.manage().timeouts().implicitlyWait(TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
+        return elementArray[0] ?: throw NoSuchElementException("Element not found on list")
     }
 
-    @FunctionalInterface
-    public interface ListScrollCallback {
+    fun interface ListScrollCallback {
         /**
          * If this returns true, it cancels further scrolling
          */
-        boolean doBeforeEachScroll() throws Exception;
+        @Throws(Exception::class)
+        fun doBeforeEachScroll(): Boolean
     }
 }
