@@ -3,6 +3,7 @@ package android.test.sample
 import android.util.AndroidTest
 import android.view.SampleDetailsView
 import android.view.SampleListView
+import common.AssertUtils.ignoreTest
 import common.ListUtils
 import common.ManualAction
 import common.junit.SemiAutomated
@@ -72,5 +73,12 @@ class SampleDetailsAndroidTest : AndroidTest() {
             triggerBy = SampleListView.TEST_MODE_ENABLED_LABEL,
             message = "Navigate back"
         )
+    }
+
+    @Test
+    @TestDescription("Test ignoring sample")
+    @Throws(Exception::class)
+    fun c007() {
+        ignoreTest("This is a test")
     }
 }
