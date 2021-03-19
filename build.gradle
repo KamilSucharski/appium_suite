@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "io.appium:java-client:7.5.0"
+    implementation "junit:junit:4.13"
+}
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
@@ -19,11 +25,6 @@ compileTestKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-dependencies {
-    implementation fileTree(dir: "lib", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 class TestTask extends Test {
