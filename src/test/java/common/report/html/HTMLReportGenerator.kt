@@ -96,11 +96,11 @@ class HTMLReportGenerator {
                 detailsBuilder.append(testTemplate
                     .replace("color_class_placeholder", entry.testResult.toString().toLowerCase())
                     .replace("test_name_placeholder".toRegex(), entry.methodName)
-                    .replace("test_description_placeholder", entry.description)
+                    .replace("test_description_placeholder", entry.description.replace("'".toRegex(), "`"))
                     .replace("test_icons_placeholder", testIconBuilder.toString())
                     .replace("test_result_placeholder", entry.testResult.toString())
-                    .replace("error_placeholder", entry.error)
-                    .replace("error_html_placeholder", entry.error.replace("\n".toRegex(), "<br/>").replace("\t".toRegex(), "&emsp;").replace("'".toRegex(), "`"))
+                    .replace("error_placeholder", entry.error.replace("'".toRegex(), "`"))
+                    .replace("error_html_placeholder", entry.error.replace("\r\n".toRegex(), "<br/>").replace("\n".toRegex(), "<br/>").replace("\t".toRegex(), "&emsp;").replace("'".toRegex(), "`"))
                 )
             }
         }
