@@ -2,7 +2,7 @@ import javax.swing.*
 
 plugins {
     id "java"
-    id "org.jetbrains.kotlin.jvm" version "1.4.31"
+    id "org.jetbrains.kotlin.jvm" version "1.5.21"
 }
 
 repositories {
@@ -10,11 +10,11 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "io.appium:java-client:7.5.0"
-    implementation "junit:junit:4.13"
-    implementation "org.apache.commons:commons-lang3:3.1"
-    implementation "com.google.code.gson:gson:2.8.7"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21'
+    implementation "io.appium:java-client:7.5.1"
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
 }
 
 compileKotlin {
