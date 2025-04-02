@@ -15,16 +15,26 @@ class JsonReportGenerator {
 
     private val gson = Gson()
 
-    fun report(className: String,
-               methodName: String,
-               description: String,
-               error: String,
-               testResult: TestResult,
-               testCategory: TestCategory) {
+    fun report(
+        className: String,
+        methodName: String,
+        description: String,
+        error: String,
+        testResult: TestResult,
+        testCategory: TestCategory
+    ) {
         try {
             val reportFile = readReportFile()
             val oldEntries = getEntries(reportFile)
-            val newEntries = addOrReplaceEntry(className, methodName, description, error, testResult, testCategory, oldEntries)
+            val newEntries = addOrReplaceEntry(
+                className,
+                methodName,
+                description,
+                error,
+                testResult,
+                testCategory,
+                oldEntries
+            )
             saveEntriesToReportFile(reportFile, newEntries)
         } catch (e: IOException) {
             e.printStackTrace()
@@ -52,17 +62,20 @@ class JsonReportGenerator {
                 stringBuilder.append(scanner.nextLine())
             }
         }
-        val entries = gson.fromJson<MutableList<ReportEntry>>(stringBuilder.toString(), ReportConstants.SERIALIZATION_TYPE)
+        val entries =
+            gson.fromJson<MutableList<ReportEntry>>(stringBuilder.toString(), ReportConstants.SERIALIZATION_TYPE)
         return entries ?: ArrayList()
     }
 
-    private fun addOrReplaceEntry(className: String,
-                                  methodName: String,
-                                  description: String,
-                                  error: String,
-                                  testResult: TestResult,
-                                  testCategory: TestCategory,
-                                  entries: MutableList<ReportEntry>): List<ReportEntry> {
+    private fun addOrReplaceEntry(
+        className: String,
+        methodName: String,
+        description: String,
+        error: String,
+        testResult: TestResult,
+        testCategory: TestCategory,
+        entries: MutableList<ReportEntry>
+    ): List<ReportEntry> {
         val duplicateEntries = entries
             .stream()
             .filter { entry: ReportEntry -> entry.className == className && entry.methodName == methodName }
@@ -76,8 +89,10 @@ class JsonReportGenerator {
     }
 
     @Throws(IOException::class)
-    private fun saveEntriesToReportFile(reportFile: File,
-                                        entries: List<ReportEntry>) {
+    private fun saveEntriesToReportFile(
+        reportFile: File,
+        entries: List<ReportEntry>
+    ) {
         PrintWriter(reportFile).use { writer -> writer.print(gson.toJson(entries)) }
     }
 }

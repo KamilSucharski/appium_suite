@@ -2,14 +2,13 @@ package common
 
 import common.watcher.ReportTestWatcher
 import common.watcher.ToastTestWatcher
-import io.appium.java_client.MobileDriver
-import io.appium.java_client.MobileElement
+import io.appium.java_client.AppiumDriver
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestRule
 
-abstract class AppiumTest<T : MobileDriver<MobileElement>> {
+abstract class AppiumTest<T : AppiumDriver> {
 
     protected val platformSpecificInstructions by lazy { createPlatformSpecificInstructions() }
     protected lateinit var driver: T
@@ -36,4 +35,5 @@ abstract class AppiumTest<T : MobileDriver<MobileElement>> {
     fun after() {
         driver.quit()
     }
+
 }

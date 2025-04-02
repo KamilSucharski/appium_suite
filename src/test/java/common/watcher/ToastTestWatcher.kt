@@ -1,13 +1,12 @@
 package common.watcher
 
 import common.PlatformSpecificInstructions
-import io.appium.java_client.MobileDriver
-import io.appium.java_client.MobileElement
+import io.appium.java_client.AppiumDriver
 import org.junit.AssumptionViolatedException
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-class ToastTestWatcher<T : MobileDriver<MobileElement>>(
+class ToastTestWatcher<T : AppiumDriver>(
     private val platformSpecificInstructions: PlatformSpecificInstructions<T>
 ) : TestWatcher() {
 
@@ -32,8 +31,7 @@ class ToastTestWatcher<T : MobileDriver<MobileElement>>(
         ))
     }
 
-    override fun skipped(e: AssumptionViolatedException,
-                         description: Description) {
+    override fun skipped(e: AssumptionViolatedException, description: Description) {
         displayMessageOnScreen(String.format(
             IGNORE_FORMAT,
             description.methodName,
@@ -41,8 +39,7 @@ class ToastTestWatcher<T : MobileDriver<MobileElement>>(
         ))
     }
 
-    override fun failed(e: Throwable,
-                        description: Description) {
+    override fun failed(e: Throwable, description: Description) {
         displayMessageOnScreen(String.format(
             FAILURE_FORMAT,
             description.methodName,
@@ -57,4 +54,5 @@ class ToastTestWatcher<T : MobileDriver<MobileElement>>(
             e.printStackTrace()
         }
     }
+
 }

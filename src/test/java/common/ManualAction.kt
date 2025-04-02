@@ -2,10 +2,9 @@ package common
 
 import common.exception.ManualActionRequiredException
 import io.appium.java_client.AppiumDriver
-import io.appium.java_client.MobileDriver
-import io.appium.java_client.MobileElement
 import org.openqa.selenium.By
 import org.openqa.selenium.NoSuchElementException
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 object ManualAction {
@@ -16,15 +15,15 @@ object ManualAction {
      */
     @Throws(Exception::class)
     fun perform(
-        driver: AppiumDriver<MobileElement>,
-        platformSpecificInstructions: PlatformSpecificInstructions<out MobileDriver<MobileElement>>,
+        driver: AppiumDriver,
+        platformSpecificInstructions: PlatformSpecificInstructions<out AppiumDriver>,
         triggerBy: By,
         message: String
     ) {
         driver
             .manage()
             .timeouts()
-            .implicitlyWait(60000, TimeUnit.MILLISECONDS)
+            .implicitlyWait(Duration.ofMillis(60000))
         platformSpecificInstructions.displayMessage(message)
         platformSpecificInstructions.vibrateDevice(2000)
         try {

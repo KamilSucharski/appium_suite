@@ -15,10 +15,15 @@ object AndroidSDKResolver {
         "9" to 28,
         "10" to 29,
         "11" to 30,
-        "12" to 31
+        "12" to 31,
+        "12L" to 32,
+        "13" to 33,
+        "14" to 34,
+        "15" to 35,
+        "16" to 36
     )
 
-    fun resolve(driver: AndroidDriver<*>): Int {
+    fun resolve(driver: AndroidDriver): Int {
         val platformName = driver.capabilities.getCapability("platformVersion") as String
         for ((key, value) in sdkMap) {
             if (platformName.startsWith(key)) {

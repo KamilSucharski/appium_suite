@@ -62,4 +62,5 @@ class ReportTestWatcher : TestWatcher() {
             TestCategory.AUTOMATED
         }
     }
+
 }

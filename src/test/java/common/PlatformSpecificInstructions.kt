@@ -1,9 +1,8 @@
 package common
 
-import io.appium.java_client.MobileDriver
-import io.appium.java_client.MobileElement
+import io.appium.java_client.AppiumDriver
 
-interface PlatformSpecificInstructions<T : MobileDriver<MobileElement>> {
+interface PlatformSpecificInstructions<T : AppiumDriver> {
     @Throws(Exception::class)
     fun resetApplication()
     @Throws(Exception::class)

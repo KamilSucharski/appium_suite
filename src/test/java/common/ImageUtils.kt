@@ -2,9 +2,9 @@ package common
 
 import kotlin.Throws
 import java.lang.Exception
-import io.appium.java_client.MobileElement
 import java.awt.image.BufferedImage
 import org.openqa.selenium.OutputType
+import org.openqa.selenium.WebElement
 import javax.imageio.ImageIO
 
 object ImageUtils {
@@ -17,7 +17,7 @@ object ImageUtils {
      */
     @JvmStatic
     @Throws(Exception::class)
-    fun createScreenshotOfMiddleOfTheElement(element: MobileElement): BufferedImage {
+    fun createScreenshotOfMiddleOfTheElement(element: WebElement): BufferedImage {
         return createScreenshotOfTheElement(
             element,
             20,
@@ -29,7 +29,7 @@ object ImageUtils {
 
     @Throws(Exception::class)
     fun createScreenshotOfTheElement(
-        element: MobileElement,
+        element: WebElement,
         percentOfWidthToInclude: Int,
         percentOfHeightToInclude: Int,
         percentOfWidthStart: Int,

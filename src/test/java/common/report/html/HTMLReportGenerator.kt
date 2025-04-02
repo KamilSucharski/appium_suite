@@ -16,6 +16,11 @@ import java.util.stream.Collectors
 
 class HTMLReportGenerator {
 
+    companion object {
+        private val HEADER_DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy")
+        private val FILE_DATE_FORMAT = SimpleDateFormat("yyyy_MM_dd__HH_mm")
+    }
+
     private val gson = Gson()
 
     @Test
@@ -23,7 +28,10 @@ class HTMLReportGenerator {
     @Throws(Exception::class)
     fun generateHTMLReport() {
         var template = getFileContent(ReportConstants.HTML_REPORT_FILE_TEMPLATE_FILE_PATH)
-        val entries = gson.fromJson<List<ReportEntry>>(getFileContent(ReportConstants.RAW_REPORT_FILE_PATH), ReportConstants.SERIALIZATION_TYPE)
+        val entries = gson.fromJson<List<ReportEntry>>(
+            getFileContent(ReportConstants.RAW_REPORT_FILE_PATH),
+            ReportConstants.SERIALIZATION_TYPE
+        )
         template = fillTemplateSummarySection(template, entries)
         template = fillTemplateDetailsSection(template, entries)
         template = template.replace("date_placeholder".toRegex(), HEADER_DATE_FORMAT.format(Date()))
@@ -45,11 +53,14 @@ class HTMLReportGenerator {
     private fun fillTemplateSummarySection(template: String, entries: List<ReportEntry>): String {
         var filledTemplate = template
         val totalCount = entries.size.toLong()
-        val successCount = entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.SUCCESS }.count()
+        val successCount =
+            entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.SUCCESS }.count()
         val successPercent = 100 * successCount / totalCount
-        val failureCount = entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.FAILURE }.count()
+        val failureCount =
+            entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.FAILURE }.count()
         val failurePercent = 100 * failureCount / totalCount
-        val ignoredCount = entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.IGNORED }.count()
+        val ignoredCount =
+            entries.stream().filter { entry: ReportEntry -> entry.testResult == TestResult.IGNORED }.count()
         val ignoredPercent = 100 * ignoredCount / totalCount
         filledTemplate = filledTemplate.replace("total_count_placeholder", totalCount.toString())
         filledTemplate = filledTemplate.replace("success_count_placeholder", successCount.toString())
@@ -67,14 +78,19 @@ class HTMLReportGenerator {
         val detailsBuilder = StringBuilder()
         val testSetTemplate = getFileContent(ReportConstants.HTML_REPORT_TEST_SET_TEMPLATE_FILE_PATH)
         val testTemplate = getFileContent(ReportConstants.HTML_REPORT_TEST_TEMPLATE_FILE_PATH)
-        val semiAutomatedIconTemplate = getFileContent(ReportConstants.HTML_REPORT_ICON_SEMI_AUTOMATED_TEMPLATE_FILE_PATH)
+        val semiAutomatedIconTemplate =
+            getFileContent(ReportConstants.HTML_REPORT_ICON_SEMI_AUTOMATED_TEMPLATE_FILE_PATH)
         val helperIconTemplate = getFileContent(ReportConstants.HTML_REPORT_ICON_HELPER_TEMPLATE_FILE_PATH)
         val testSets: List<Map.Entry<String, List<ReportEntry>>> = entries
             .stream()
             .collect(Collectors.groupingBy { it.className })
             .entries
             .stream()
-            .sorted { o1: Map.Entry<String, List<ReportEntry>>, o2: Map.Entry<String, List<ReportEntry>> -> o1.key.compareTo(o2.key) }
+            .sorted { o1: Map.Entry<String, List<ReportEntry>>, o2: Map.Entry<String, List<ReportEntry>> ->
+                o1.key.compareTo(
+                    o2.key
+                )
+            }
             .collect(Collectors.toList())
         for ((key, value) in testSets) {
             detailsBuilder.append(testSetTemplate.replace("test_set_name_placeholder", key))
@@ -88,20 +104,49 @@ class HTMLReportGenerator {
                     TestCategory.SEMI_AUTOMATED -> {
                         testIconBuilder.append(semiAutomatedIconTemplate)
                     }
+
                     TestCategory.HELPER -> {
                         testIconBuilder.append(helperIconTemplate)
                     }
+
                     else -> {}
                 }
-                detailsBuilder.append(testTemplate
-                    .replace("color_class_placeholder", entry.testResult.toString().toLowerCase())
-                    .replace("test_name_placeholder".toRegex(), entry.methodName)
-                    .replace("test_description_placeholder", entry.description.replace("'".toRegex(), "`"))
-                    .replace("test_icons_placeholder", testIconBuilder.toString())
-                    .replace("test_result_placeholder", entry.testResult.toString())
-                    .replace("error_placeholder", entry.error.replace("'".toRegex(), "`"))
-                    .replace("error_html_placeholder", entry.error.replace("\r\n".toRegex(), "<br/>").replace("\n".toRegex(), "<br/>").replace("\t".toRegex(), "&emsp;").replace("'".toRegex(), "`"))
-                )
+
+                testTemplate
+                    .replace(
+                        "color_class_placeholder",
+                        entry.testResult.toString().lowercase(Locale.getDefault())
+                    )
+                    .replace(
+                        "test_name_placeholder".toRegex(),
+                        entry.methodName
+                    )
+                    .replace(
+                        "test_description_placeholder",
+                        entry.description.replace("'".toRegex(), "`")
+                    )
+                    .replace(
+                        "test_icons_placeholder",
+                        testIconBuilder.toString()
+                    )
+                    .replace(
+                        "test_result_placeholder",
+                        entry.testResult.toString()
+                    )
+                    .replace(
+                        "error_placeholder",
+                        entry.error.replace("'".toRegex(), "`")
+                    )
+                    .replace(
+                        "error_html_placeholder",
+                        entry.error
+                            .replace("\r\n".toRegex(), "<br/>")
+                            .replace("\n".toRegex(), "<br/>")
+                            .replace("\t".toRegex(), "&emsp;")
+                            .replace("'".toRegex(), "`")
+                    )
+                    .let(detailsBuilder::append)
+
             }
         }
         filledTemplate = filledTemplate.replace("details_placeholder", detailsBuilder.toString())
@@ -114,8 +159,4 @@ class HTMLReportGenerator {
         PrintWriter(File(fileName)).use { writer -> writer.print(template) }
     }
 
-    companion object {
-        private val HEADER_DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy")
-        private val FILE_DATE_FORMAT = SimpleDateFormat("yyyy_MM_dd__HH_mm")
-    }
 }

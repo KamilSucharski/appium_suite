@@ -4,9 +4,9 @@ import android.util.AndroidTest
 import android.view.SampleListView
 import common.ListUtils
 import common.junit.TestDescription
-import io.appium.java_client.MobileElement
 import org.junit.Assert
 import org.junit.Test
+import org.openqa.selenium.WebElement
 
 class SampleListAndroidTest : AndroidTest() {
 
@@ -64,7 +64,7 @@ class SampleListAndroidTest : AndroidTest() {
             driver
                 .findElements(SampleListView.LIST_ELEMENT_LABEL)
                 .stream()
-                .map(MobileElement::getText)
+                .map(WebElement::getText)
                 .forEach(foundItems::add)
             false
         }

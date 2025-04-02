@@ -8,7 +8,6 @@ import common.ListUtils
 import common.ManualAction
 import common.junit.SemiAutomated
 import common.junit.TestDescription
-import io.appium.java_client.MobileElement
 import org.junit.Assert
 import org.junit.Test
 import org.junit.experimental.categories.Category
@@ -81,4 +80,5 @@ class SampleDetailsAndroidTest : AndroidTest() {
     fun c007() {
         ignoreTest("This is a test")
     }
+
 }

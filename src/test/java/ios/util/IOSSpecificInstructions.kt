@@ -1,10 +1,10 @@
 package ios.util
 
 import common.PlatformSpecificInstructions
-import io.appium.java_client.MobileElement
+import org.openqa.selenium.WebElement
 import io.appium.java_client.ios.IOSDriver
 
-class IOSSpecificInstructions : PlatformSpecificInstructions<IOSDriver<MobileElement>> {
+class IOSSpecificInstructions : PlatformSpecificInstructions<IOSDriver> {
 
     @Throws(Exception::class)
     override fun resetApplication() {
@@ -42,11 +42,12 @@ class IOSSpecificInstructions : PlatformSpecificInstructions<IOSDriver<MobileEle
         SIMCTLCommands.removeApplicationFile()
     }
 
-    override fun getApplicationName(driver: IOSDriver<MobileElement>): String {
+    override fun getApplicationName(driver: IOSDriver): String {
         return "TODO"
     }
 
-    override fun getScreenName(driver: IOSDriver<MobileElement>): String {
+    override fun getScreenName(driver: IOSDriver): String {
         return "TODO"
     }
+
 }

@@ -2,7 +2,7 @@ import javax.swing.*
 
 plugins {
     id "java"
-    id "org.jetbrains.kotlin.jvm" version "1.5.21"
+    id "org.jetbrains.kotlin.jvm" version "2.1.20"
 }
 
 repositories {
@@ -10,26 +10,25 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21'
-    implementation "io.appium:java-client:7.5.1"
+    implementation "io.appium:java-client:9.4.0"
     implementation 'junit:junit:4.13.2'
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'com.google.code.gson:gson:2.12.1'
 }
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17
     }
 }
 
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17
     }
 }
 
-class TestTask extends Test {
+abstract class TestTask extends Test {
 
     @Option(option = "packageName", description = "Package to run tests in")
     String packageName
@@ -41,32 +40,32 @@ class TestTask extends Test {
     }
 }
 
-task completeRegressionAndroid(type: TestTask) {
+tasks.register('completeRegressionAndroid', TestTask) {
     packageName = "android/test/regression/CompleteRegressionAndroidSuite.class"
 }
 
-task onlySemiAutomatedRegressionAndroid(type: TestTask) {
+tasks.register('onlySemiAutomatedRegressionAndroid', TestTask) {
     packageName = "android/test/regression/OnlySemiAutomatedRegressionAndroidSuite.class"
 }
 
-task onlyFullyAutomatedRegressionAndroid(type: TestTask) {
+tasks.register('onlyFullyAutomatedRegressionAndroid', TestTask) {
     packageName = "android/test/regression/OnlyFullyAutomatedRegressionAndroidSuite.class"
 }
 
-task completeRegressionIOS(type: TestTask) {
+tasks.register('completeRegressionIOS', TestTask) {
     packageName = "ios/test/regression/CompleteRegressionIOSSuite.class"
 }
 
-task reportClean {
+tasks.register('reportClean') {
     doLast {
-        int dialogResult = JOptionPane.showConfirmDialog (
-            null,
-            "This action will delete both json and html reports.",
-            "Delete reports?",
-            JOptionPane.YES_NO_OPTION
+        int dialogResult = JOptionPane.showConfirmDialog(
+                null,
+                "This action will delete both json and html reports.",
+                "Delete reports?",
+                JOptionPane.YES_NO_OPTION
         )
 
-        if (dialogResult == JOptionPane.YES_OPTION){
+        if (dialogResult == JOptionPane.YES_OPTION) {
             final File reportOutputDirectory = new File("report")
             if (reportOutputDirectory.exists()) {
                 reportOutputDirectory.deleteDir()
@@ -75,6 +74,6 @@ task reportClean {
     }
 }
 
-task reportHTML(type: TestTask) {
+tasks.register('reportHTML', TestTask) {
     packageName = "common/report/html/HTMLReportGenerator.class"
 }
