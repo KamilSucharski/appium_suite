@@ -1,6 +1,6 @@
 package common.test.sample
 
-import android.view.SampleListView
+import common.view.SampleListView
 import common.util.ListUtils
 import common.util.driver
 import common.util.junit.TestDescription

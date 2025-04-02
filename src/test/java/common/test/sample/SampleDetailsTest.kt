@@ -1,7 +1,7 @@
 package common.test.sample
 
-import android.view.SampleDetailsView
-import android.view.SampleListView
+import common.view.SampleDetailsView
+import common.view.SampleListView
 import common.util.AssertUtils.ignoreTest
 import common.util.ListUtils
 import common.util.ManualAction
