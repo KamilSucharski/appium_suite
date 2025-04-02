@@ -56,6 +56,14 @@ tasks.register('completeRegressionIOS', TestTask) {
     packageName = "ios/test/regression/CompleteRegressionIOSSuite.class"
 }
 
+tasks.register('onlySemiAutomatedRegressionIOS', TestTask) {
+    packageName = "ios/test/regression/OnlySemiAutomatedRegressionIOSSuite.class"
+}
+
+tasks.register('onlyFullyAutomatedRegressionIOS', TestTask) {
+    packageName = "ios/test/regression/OnlyFullyAutomatedRegressionIOSSuite.class"
+}
+
 tasks.register('reportClean') {
     doLast {
         int dialogResult = JOptionPane.showConfirmDialog(
