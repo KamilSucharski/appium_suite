@@ -1,6 +1,6 @@
 package android.util
 
-import common.PlatformSpecificInstructions
+import common.util.PlatformSpecificInstructions
 import io.appium.java_client.android.AndroidDriver
 
 class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver> {

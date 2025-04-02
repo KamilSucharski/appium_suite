@@ -1,7 +1,6 @@
 package ios.util
 
-import common.PlatformSpecificInstructions
-import org.openqa.selenium.WebElement
+import common.util.PlatformSpecificInstructions
 import io.appium.java_client.ios.IOSDriver
 
 class IOSSpecificInstructions : PlatformSpecificInstructions<IOSDriver> {
