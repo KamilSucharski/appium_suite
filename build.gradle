@@ -31,6 +31,7 @@ compileTestKotlin {
 abstract class TestTask extends Test {
 
     @Option(option = "packageName", description = "Package to run tests in")
+    @Input
     String packageName
 
     @Override
@@ -83,5 +84,5 @@ tasks.register('reportClean') {
 }
 
 tasks.register('reportHTML', TestTask) {
-    packageName = "common/report/html/HTMLReportGenerator.class"
+    packageName = "common/util/report/html/HTMLReportGenerator.class"
 }

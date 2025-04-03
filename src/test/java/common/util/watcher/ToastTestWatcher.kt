@@ -6,8 +6,8 @@ import org.junit.AssumptionViolatedException
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-class ToastTestWatcher<T : AppiumDriver>(
-    private val platformSpecificInstructions: PlatformSpecificInstructions<T>
+class ToastTestWatcher(
+    private val platformSpecificInstructions: PlatformSpecificInstructions<*>
 ) : TestWatcher() {
 
     companion object {

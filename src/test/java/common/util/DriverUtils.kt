@@ -8,6 +8,7 @@ import org.openqa.selenium.By
 import org.openqa.selenium.NoSuchElementException
 import org.openqa.selenium.StaleElementReferenceException
 import org.openqa.selenium.support.ui.ExpectedConditions
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 object DriverUtils {
@@ -20,7 +21,8 @@ object DriverUtils {
         driver
             .manage()
             .timeouts()
-            .implicitlyWait(1000, TimeUnit.MILLISECONDS)
+            .implicitlyWait(Duration.ofSeconds(1))
+
         var retriesLeft = 30
         while (retriesLeft > 0) {
             retriesLeft--
@@ -28,7 +30,7 @@ object DriverUtils {
                 driver
                     .manage()
                     .timeouts()
-                    .implicitlyWait(TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                    .implicitlyWait(Duration.ofMillis(TIMEOUT_MILLISECONDS))
                 return
             }
             try {
@@ -36,10 +38,12 @@ object DriverUtils {
             } catch (ignored: Exception) {
             }
         }
+
         driver
             .manage()
             .timeouts()
-            .implicitlyWait(TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
+            .implicitlyWait(Duration.ofMillis(TIMEOUT_MILLISECONDS))
+
         throw ElementDidNotDisappearException()
     }
 
@@ -47,25 +51,6 @@ object DriverUtils {
         val wait = create(driver)
         val nextButton = driver.findElement(locator)
         wait.until(ExpectedConditions.attributeToBe(nextButton, "enabled", "true"))
-    }
-
-    fun AppiumDriver.dragFromToForDuration(
-        duration: Double,
-        fromX: Int,
-        fromY: Int,
-        toX: Int,
-        toY: Int
-    ) {
-        executeScript(
-            "mobile: dragFromToForDuration",
-            mapOf(
-                "duration" to duration,
-                "fromX" to fromX,
-                "fromY" to fromY,
-                "toX" to toX,
-                "toY" to toY
-            )
-        )
     }
 
     fun isElementDisplayed(driver: AppiumDriver, locator: By): Boolean {

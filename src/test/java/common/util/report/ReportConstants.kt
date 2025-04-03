@@ -9,7 +9,7 @@ object ReportConstants {
     const val REPORT_OUTPUT_DIRECTORY_PATH = "report"
     const val RAW_REPORT_FILE_PATH = "$REPORT_OUTPUT_DIRECTORY_PATH/test_results.json"
     const val HTML_REPORT_FILE_PATH_FORMAT = "$REPORT_OUTPUT_DIRECTORY_PATH/test_results_%s.html"
-    private const val HTML_TEMPLATES_DIRECTORY_PATH = "src/test/java/common/report/html/template"
+    private const val HTML_TEMPLATES_DIRECTORY_PATH = "src/test/java/common/util/report/html/template"
     const val HTML_REPORT_FILE_TEMPLATE_FILE_PATH = "$HTML_TEMPLATES_DIRECTORY_PATH/file_template.html"
     const val HTML_REPORT_TEST_SET_TEMPLATE_FILE_PATH = "$HTML_TEMPLATES_DIRECTORY_PATH/test_set_template.html"
     const val HTML_REPORT_TEST_TEMPLATE_FILE_PATH = "$HTML_TEMPLATES_DIRECTORY_PATH/test_template.html"

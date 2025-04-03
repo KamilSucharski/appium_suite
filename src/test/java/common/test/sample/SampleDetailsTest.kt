@@ -1,19 +1,16 @@
 package common.test.sample
 
+import common.util.*
 import common.view.SampleDetailsView
 import common.view.SampleListView
 import common.util.AssertUtils.ignoreTest
-import common.util.ListUtils
-import common.util.ManualAction
-import common.util.driver
 import common.util.junit.SemiAutomated
 import common.util.junit.TestDescription
-import common.util.platformSpecificInstructions
 import org.junit.Assert
 import org.junit.Test
 import org.junit.experimental.categories.Category
 
-class SampleDetailsTest {
+class SampleDetailsTest : AppiumTest() {
 
     @Test
     @TestDescription("Navigate to first item")

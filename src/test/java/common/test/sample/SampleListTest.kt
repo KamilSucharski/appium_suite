@@ -1,5 +1,6 @@
 package common.test.sample
 
+import common.util.AppiumTest
 import common.view.SampleListView
 import common.util.ListUtils
 import common.util.driver
@@ -9,7 +10,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.openqa.selenium.WebElement
 
-class SampleListTest {
+class SampleListTest : AppiumTest() {
 
     @Test
     @TestDescription("Test mode is set to true")
