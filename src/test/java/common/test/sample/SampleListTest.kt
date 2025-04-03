@@ -2,8 +2,8 @@ package common.test.sample
 
 import common.util.AppiumTest
 import common.view.SampleListView
-import common.util.ListUtils
 import common.util.driver
+import common.util.extension.scrollToBottom
 import common.util.junit.TestDescription
 import common.util.platformSpecificInstructions
 import org.junit.Assert
@@ -59,10 +59,7 @@ class SampleListTest : AppiumTest() {
         platformSpecificInstructions.restartApplication()
 
         val foundItems = mutableSetOf<String>()
-        ListUtils.scrollToBottom(
-            driver,
-            SampleListView.LIST
-        ) {
+        driver.scrollToBottom(SampleListView.LIST) {
             driver
                 .findElements(SampleListView.LIST_ELEMENT_LABEL)
                 .stream()

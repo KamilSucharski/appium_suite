@@ -27,7 +27,7 @@ sealed class Platform {
                 AndroidAppiumConstants.AUTOMATION_NAME_ATTRIBUTE_VALUE
             )
             val driver = AndroidDriver(URL(SharedConstants.DRIVER_URL), desiredCapabilities)
-            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(SharedConstants.TIMEOUT_MILLISECONDS))
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(SharedConstants.TIMEOUT_SECONDS))
             driver
         }
 
@@ -45,7 +45,7 @@ sealed class Platform {
                 IOSAppiumConstants.AUTOMATION_NAME_ATTRIBUTE_VALUE
             )
             val driver = IOSDriver(URL(IOSAppiumConstants.DRIVER_URL), desiredCapabilities)
-            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(SharedConstants.TIMEOUT_MILLISECONDS))
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(SharedConstants.TIMEOUT_SECONDS))
             driver
         }
 

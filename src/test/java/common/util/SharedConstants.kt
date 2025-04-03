@@ -2,7 +2,7 @@ package common.util
 
 object SharedConstants {
 
-    const val TIMEOUT_MILLISECONDS = 30000L
+    const val TIMEOUT_SECONDS = 30L
     const val EMPTY = ""
 
     // DESIRED CAPABILITIES

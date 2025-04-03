@@ -4,6 +4,7 @@ import common.util.*
 import common.view.SampleDetailsView
 import common.view.SampleListView
 import common.util.AssertUtils.ignoreTest
+import common.util.extension.scrollToBottom
 import common.util.junit.SemiAutomated
 import common.util.junit.TestDescription
 import org.junit.Assert
@@ -32,10 +33,7 @@ class SampleDetailsTest : AppiumTest() {
     fun c005() {
         platformSpecificInstructions.restartApplication()
         val expectedText = "Z"
-        ListUtils.scrollToBottom(
-            driver = driver,
-            listBy = SampleListView.LIST
-        ) {
+        driver.scrollToBottom(SampleListView.LIST) {
             val element = driver
                 .findElements(SampleListView.LIST_ELEMENT_LABEL)
                 .stream()

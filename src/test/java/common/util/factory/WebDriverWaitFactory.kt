@@ -10,9 +10,9 @@ object WebDriverWaitFactory {
     @JvmOverloads
     fun create(
         driver: AppiumDriver,
-        timeoutMilliseconds: Long = SharedConstants.TIMEOUT_MILLISECONDS
+        timeout: Duration = Duration.ofSeconds(SharedConstants.TIMEOUT_SECONDS)
     ): WebDriverWait {
-        return WebDriverWait(driver, Duration.ofMillis(timeoutMilliseconds))
+        return WebDriverWait(driver, timeout)
     }
 
 }
