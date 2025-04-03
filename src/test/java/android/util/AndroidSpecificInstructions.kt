@@ -1,10 +1,9 @@
 package android.util
 
-import common.PlatformSpecificInstructions
-import io.appium.java_client.MobileElement
+import common.util.PlatformSpecificInstructions
 import io.appium.java_client.android.AndroidDriver
 
-class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver<MobileElement>> {
+class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver> {
 
     @Throws(Exception::class)
     override fun resetApplication() {
@@ -46,11 +45,12 @@ class AndroidSpecificInstructions : PlatformSpecificInstructions<AndroidDriver<M
         // not needed
     }
 
-    override fun getApplicationName(driver: AndroidDriver<MobileElement>): String {
-        return driver.currentPackage
+    override fun getApplicationName(driver: AndroidDriver): String {
+        return driver.currentPackage!!
     }
 
-    override fun getScreenName(driver: AndroidDriver<MobileElement>): String {
-        return driver.currentActivity()
+    override fun getScreenName(driver: AndroidDriver): String {
+        return driver.currentActivity()!!
     }
+
 }
