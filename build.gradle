@@ -11,9 +11,8 @@ repositories {
 
 dependencies {
     implementation "io.appium:java-client:9.4.0"
-    implementation 'junit:junit:4.13.2'
-    implementation 'org.apache.commons:commons-lang3:3.17.0'
-    implementation 'com.google.code.gson:gson:2.12.1'
+    implementation "junit:junit:4.13.2"
+    implementation "com.google.code.gson:gson:2.12.1"
 }
 
 compileKotlin {
@@ -41,31 +40,31 @@ abstract class TestTask extends Test {
     }
 }
 
-tasks.register('completeRegressionAndroid', TestTask) {
+tasks.register("completeRegressionAndroid", TestTask) {
     packageName = "android/test/regression/CompleteRegressionAndroidSuite.class"
 }
 
-tasks.register('onlySemiAutomatedRegressionAndroid', TestTask) {
+tasks.register("onlySemiAutomatedRegressionAndroid", TestTask) {
     packageName = "android/test/regression/OnlySemiAutomatedRegressionAndroidSuite.class"
 }
 
-tasks.register('onlyFullyAutomatedRegressionAndroid', TestTask) {
+tasks.register("onlyFullyAutomatedRegressionAndroid", TestTask) {
     packageName = "android/test/regression/OnlyFullyAutomatedRegressionAndroidSuite.class"
 }
 
-tasks.register('completeRegressionIOS', TestTask) {
+tasks.register("completeRegressionIOS", TestTask) {
     packageName = "ios/test/regression/CompleteRegressionIOSSuite.class"
 }
 
-tasks.register('onlySemiAutomatedRegressionIOS', TestTask) {
+tasks.register("onlySemiAutomatedRegressionIOS", TestTask) {
     packageName = "ios/test/regression/OnlySemiAutomatedRegressionIOSSuite.class"
 }
 
-tasks.register('onlyFullyAutomatedRegressionIOS', TestTask) {
+tasks.register("onlyFullyAutomatedRegressionIOS", TestTask) {
     packageName = "ios/test/regression/OnlyFullyAutomatedRegressionIOSSuite.class"
 }
 
-tasks.register('reportClean') {
+tasks.register("reportClean") {
     doLast {
         int dialogResult = JOptionPane.showConfirmDialog(
                 null,
@@ -83,6 +82,6 @@ tasks.register('reportClean') {
     }
 }
 
-tasks.register('reportHTML', TestTask) {
+tasks.register("reportHTML", TestTask) {
     packageName = "common/util/report/html/HTMLReportGenerator.class"
 }

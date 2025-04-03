@@ -8,6 +8,7 @@ import common.util.report.TestCategory
 import common.util.report.TestResult
 import org.junit.Test
 import org.junit.experimental.categories.Category
+import java.awt.Desktop
 import java.io.File
 import java.io.PrintWriter
 import java.text.SimpleDateFormat
@@ -155,8 +156,9 @@ class HTMLReportGenerator {
 
     @Throws(Exception::class)
     private fun saveTemplateToReportFile(template: String) {
-        val fileName = String.format(ReportConstants.HTML_REPORT_FILE_PATH_FORMAT, FILE_DATE_FORMAT.format(Date()))
-        PrintWriter(File(fileName)).use { writer -> writer.print(template) }
+        val file = File(String.format(ReportConstants.HTML_REPORT_FILE_PATH_FORMAT, FILE_DATE_FORMAT.format(Date())))
+        PrintWriter(file).use { writer -> writer.print(template) }
+        Desktop.getDesktop().browse(file.toURI())
     }
 
 }

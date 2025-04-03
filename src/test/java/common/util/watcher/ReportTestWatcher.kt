@@ -6,7 +6,6 @@ import common.util.report.TestCategory
 import common.util.report.TestCategory.Companion.getForCategory
 import common.util.report.TestResult
 import common.util.report.json.JsonReportGenerator
-import org.apache.commons.lang3.exception.ExceptionUtils
 import org.junit.AssumptionViolatedException
 import org.junit.experimental.categories.Category
 import org.junit.rules.TestWatcher
@@ -32,7 +31,7 @@ class ReportTestWatcher : TestWatcher() {
             description.className,
             description.methodName,
             getTestDescription(description),
-            ExceptionUtils.getStackTrace(e),
+            e.stackTraceToString(),
             TestResult.IGNORED,
             getTestCategory(description)
         )
@@ -43,7 +42,7 @@ class ReportTestWatcher : TestWatcher() {
             description.className,
             description.methodName,
             getTestDescription(description),
-            ExceptionUtils.getStackTrace(e),
+            e.stackTraceToString(),
             TestResult.FAILURE,
             getTestCategory(description)
         )
